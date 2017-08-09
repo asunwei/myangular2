@@ -3,36 +3,23 @@ import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms'; // <-- NgModel lives here
 
 import { AppComponent } from './app.component';
-import { HelloDetailComponent} from './hero-detail.component';
+import { HeroDetailComponent} from './hero-detail.component';
 import {HeroService} from './hero.service';
 import {HeroesComponent} from './heroes.component';
-import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 
+import {AppRoutingModule} from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HelloDetailComponent,
+    HeroDetailComponent,
     DashboardComponent,
     HeroesComponent
   ],
-  imports: [BrowserModule,FormsModule,
-  RouterModule.forRoot([
-    {
-      path:'heroes',
-      component:HeroesComponent
-    },
-    {
-      path:'dashboard',
-      component:DashboardComponent
-    },
-    {
-      path:'',
-      redirectTo:'./dashboard',
-      pathMatch:'full'
-    }
-    
-  ]),
+  imports: [ 
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [HeroService],
   bootstrap: [AppComponent]
