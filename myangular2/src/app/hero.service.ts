@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Hero} from './hero'
-import {Http} from '@angular/Http';
+import {Http,Headers} from '@angular/Http';
 import 'rxjs/add/operator/toPromise';
 
 
@@ -25,10 +25,19 @@ export class HeroService{
     return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id ))
   }
 
-  getHeroesSlowly(): Promise<Hero[]> {
-  return new Promise(resolve => {
-    // Simulate server latency with 2 second delay
-    setTimeout(() => resolve(this.getHeroes()), 20000);
-  });
-}
+  getHeroesSlowly(id : number): Promise<Hero[]> {
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get(url).toPromise()
+    .then(Response => Response.json().data as Hero)
+    .catch(this.handleError);
+  }
+
+  private headers = new Headers({'Content-Type':'application/json'});
+  update(hero : Hero) : Promise<Hero> {
+    const url = `${this.heroesUrl}/${hero.id}`;
+    return this.http.put(url,JSON.stringify(hero),{headers : this.headers})
+    .toPromise()
+    .then(() => hero)
+    .catch(this.handleError);
+  }
 }   
