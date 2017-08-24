@@ -13,12 +13,14 @@ import {HttpModule} from '@angular/http';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
+import { HeroSearchComponent } from './hero-search.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeroDetailComponent,
     DashboardComponent,
-    HeroesComponent
+    HeroesComponent,
+    HeroSearchComponent
   ],
   imports: [ 
     BrowserModule,
